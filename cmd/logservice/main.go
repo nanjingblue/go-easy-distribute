@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/nanjingblue/go-easy-distribute/log"
+	"github.com/nanjingblue/go-easy-distribute/registry"
 	"github.com/nanjingblue/go-easy-distribute/service"
 	stdlog "log"
 )
@@ -11,11 +12,18 @@ import (
 func main() {
 	log.Run("./destination.log")
 	host, port := "localhost", "4000"
+	serviceAddress := fmt.Sprintf("http://%s:%s", host, port)
+
+	r := registry.Registration{
+		ServiceName: "Log Service",
+		ServiceURL:  serviceAddress,
+	}
+
 	ctx, err := service.Start(
 		context.Background(),
-		"Log service",
 		host,
 		port,
+		r,
 		log.RegisterHandlers,
 	)
 	if err != nil {
