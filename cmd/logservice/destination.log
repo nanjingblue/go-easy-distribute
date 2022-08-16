@@ -4,3 +4,18 @@ go: 2022/08/15 00:41:28 记录
 go: 2022/08/16 17:38:01 [GradingService] - failed to deregister service. Registry service responded with code 500
 go: 2022/08/16 17:38:01 [GradingService] - http: Server closed
 go: 2022/08/16 17:39:46 [GradingService] - http: Server closed
+go: 2022/08/16 17:58:21 [GradingService] - failed to deregister service. Registry service responded with code 500
+go: 2022/08/16 17:58:21 [GradingService] - http: Server closed
+go: 2022/08/16 17:58:21 [GradingService] - failed to deregister service. Registry service responded with code 500
+go: 2022/08/16 18:09:30 [GradingService] - failed to deregister service. Registry service responded with code 500
+go: 2022/08/16 18:09:30 [GradingService] - http: Server closed
+go: 2022/08/16 18:10:46 [GradingService] - student with id '886' not found
+go: 2022/08/16 18:10:46 [GradingService] - student with id '886' not found
+go: 2022/08/16 18:10:49 [GradingService] - student with id '886' not found
+go: 2022/08/16 18:10:52 [GradingService] - student with id '886' not found
+go: 2022/08/16 18:24:15 [GradingService] - student with id '756' not found
+go: 2022/08/16 18:24:15 [GradingService] - student with id '756' not found
+go: 2022/08/16 18:24:20 [GradingService] - student with id '756' not found
+go: 2022/08/16 18:58:11 [GradingService] - &{0xc0001b2300 [] {[] 0 0 {<nil> false [] <nil> 0} <nil> <nil> false false} 0 0 {<nil> false [] <nil> 0} <nil> 0 []}
+go: 2022/08/16 18:58:22 [GradingService] - &{0xc0001b2780 [] {[] 0 0 {<nil> false [] <nil> 0} <nil> <nil> false false} 0 0 {<nil> false [] <nil> 0} <nil> 0 []}
+go: 2022/08/16 19:10:19 [GradingService] - &{0xc000064b00 [] {[] 0 0 {<nil> false [] <nil> 0} <nil> <nil> false false} 0 0 {<nil> false [] <nil> 0} <nil> 0 []}

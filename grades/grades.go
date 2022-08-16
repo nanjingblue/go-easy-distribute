@@ -23,8 +23,8 @@ func (s Student) Average() float32 {
 type Students []Student
 
 var (
-	students     Students = GetFaker(3)
-	studentMutex sync.Mutex
+	students      Students = GetFaker(3)
+	studentsMutex sync.Mutex
 )
 
 func (ss Students) GetByID(id int) (*Student, error) {

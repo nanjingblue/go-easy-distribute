@@ -44,14 +44,14 @@ func (sh studentsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func (sh studentsHandler) getAll(w http.ResponseWriter, r *http.Request) {
-	studentMutex.Lock()
-	defer studentMutex.Unlock()
+	studentsMutex.Lock()
+	defer studentsMutex.Unlock()
 
 	data, err := sh.toJSON(students)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
-	w.Header().Add("Content-type", "Application/json")
+	w.Header().Add("Content-Type", "application/json")
 	w.Write(data)
 }
 
@@ -66,8 +66,8 @@ func (sh studentsHandler) toJSON(obj interface{}) ([]byte, error) {
 }
 
 func (sh studentsHandler) getOne(w http.ResponseWriter, r *http.Request, id int) {
-	studentMutex.Lock()
-	defer studentMutex.Unlock()
+	studentsMutex.Lock()
+	defer studentsMutex.Unlock()
 
 	student, err := students.GetByID(id)
 	if err != nil {
@@ -82,13 +82,13 @@ func (sh studentsHandler) getOne(w http.ResponseWriter, r *http.Request, id int)
 		log.Printf("failed to serialize student: %q\n", err)
 		return
 	}
-	w.Header().Add("Content-Type", "Application/json")
+	w.Header().Add("Content-Type", "application/json")
 	w.Write(data)
 }
 
 func (sh studentsHandler) addGrade(w http.ResponseWriter, r *http.Request, id int) {
-	studentMutex.Lock()
-	defer studentMutex.Unlock()
+	studentsMutex.Lock()
+	defer studentsMutex.Unlock()
 
 	student, err := students.GetByID(id)
 	if err != nil {
@@ -112,6 +112,6 @@ func (sh studentsHandler) addGrade(w http.ResponseWriter, r *http.Request, id in
 		log.Println(err)
 		return
 	}
-	w.Header().Add("Content-Type", "Application/json")
+	w.Header().Add("Content-Type", "application/json")
 	w.Write(data)
 }

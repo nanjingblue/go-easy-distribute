@@ -3,21 +3,28 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/nanjingblue/go-easy-distribute/grades"
 	"github.com/nanjingblue/go-easy-distribute/log"
+	"github.com/nanjingblue/go-easy-distribute/portal"
 	"github.com/nanjingblue/go-easy-distribute/registry"
 	"github.com/nanjingblue/go-easy-distribute/service"
-	stdlog "log"
+	stlog "log"
 )
 
 func main() {
-	host, port := "localhost", "6000"
+	err := portal.ImportTemplates()
+	if err != nil {
+		stlog.Fatal(err)
+	}
+	host, port := "localhost", "5000"
 	serviceAddress := fmt.Sprintf("http://%s:%s", host, port)
 
 	r := registry.Registration{
-		ServiceName:      registry.GradingService,
-		ServiceURL:       serviceAddress,
-		RequiredServices: []registry.ServiceName{registry.LogService},
+		ServiceName: registry.PortalService,
+		ServiceURL:  serviceAddress,
+		RequiredServices: []registry.ServiceName{
+			registry.LogService,
+			registry.GradingService,
+		},
 		ServiceUpdateURL: serviceAddress + "/services",
 		HeartbeatURL:     serviceAddress + "/heartbeat",
 	}
@@ -26,14 +33,13 @@ func main() {
 		host,
 		port,
 		r,
-		grades.RegisterHandlers)
+		portal.RegisterHandlers)
 	if err != nil {
-		stdlog.Fatal(err)
+		stlog.Fatal(err)
 	}
-	if logProvider, err := registry.GetProvider(registry.LogService); err == nil {
-		fmt.Printf("logging service found at： %s\n", logProvider)
+	if logProvider, err := registry.GetProvider(registry.LogService); err != nil {
 		log.SetClientLogger(logProvider, r.ServiceName)
 	}
 	<-ctx.Done()
-	fmt.Println("Shutting down grading service")
+	fmt.Println("Shutting down portal.")
 }
